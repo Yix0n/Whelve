@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 1f;
+    public float moveSpeed = 10f;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,18 +15,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // pobierz san kontrolera (poziom)
-        float x = Input.GetAxis("Horizontal");
-        
+        float x = Input.GetAxisRaw("Horizontal");
 
-        // wylicz docelowy ruch poziomo (lewo/prawo w osi X) mno¿¹c wychylenie kontrolera przez 1 oraz czas ostatniej klatki
+        Vector3 movement = Vector3.right * x;
 
-        // dodaj do obecnej pozycji jedn¹ jednostke "w prawo" (w osi X)
-        Vector3 movement = Vector3.right * x * Time.deltaTime;
-
-        float y = Input.GetAxis("Vertical");
-        movement += Vector3.forward * y * Time.deltaTime;
+        float y = Input.GetAxisRaw("Vertical");
+        movement += Vector3.forward * y;
 
         movement = movement.normalized;
+
+        movement *= Time.deltaTime;
 
         movement *= moveSpeed;
 
