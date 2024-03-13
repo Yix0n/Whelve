@@ -30,4 +30,9 @@ public class PlayerController : MonoBehaviour
 
         transform.position += movement;
     }
+
+    public void Hit(GameObject other)
+    {
+
+    }
 }

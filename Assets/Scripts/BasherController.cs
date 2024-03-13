@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BasherController : MonoBehaviour
@@ -18,5 +19,17 @@ public class BasherController : MonoBehaviour
         transform.LookAt(player.transform.position);
         //idz do przodu
         transform.position += transform.forward * Time.deltaTime * walkSpeed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject projec = collision.gameObject;
+
+        if(projec.CompareTag("PlayerProjectile")) 
+        {
+            Destroy(projec);
+
+            Destroy(transform.gameObject);
+        }
     }
 }

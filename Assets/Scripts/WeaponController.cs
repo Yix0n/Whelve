@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    public float range = 10f;
+    public float range = 15f;
 
     Transform player;
+
+    public GameObject projectilePrefab;
+
+    public GameObject projectileSpawnGO;
+
+    Transform projectileSpawn;
+
+    public float rateOfFire = 1; // strzał na sekunde
+
+    float timeSinceLastFire = 0;
+
+    public float projectileForce = 20;
 
     void Start()
     {
         // pozycja gracza
         player = GameObject.FindWithTag("Player").transform;
+
+        projectileSpawn = projectileSpawnGO.GetComponent<Transform>();
     }
 
     // Update is called once per frame
@@ -23,6 +37,24 @@ public class WeaponController : MonoBehaviour
             Debug.Log("Celuje do: " + target.gameObject.name);
             transform.LookAt(target.position + Vector3.up);
         }
+
+        if(timeSinceLastFire > rateOfFire)
+        {
+            GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
+
+            Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+
+            projectileRB.AddForce(projectileSpawn.transform.forward * projectileForce, ForceMode.VelocityChange);
+
+            timeSinceLastFire = 0;
+
+            Destroy(projectile, 5);
+
+        } else
+        {
+            timeSinceLastFire += Time.deltaTime;
+        }
+
     }
     Transform TagTargeter(string tag)
     {
