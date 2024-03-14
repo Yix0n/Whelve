@@ -552,6 +552,7 @@ GameObject:
   - component: {fileID: 1040129490908755515}
   - component: {fileID: 1793054041139881803}
   - component: {fileID: -7957966056623614272}
+  - component: {fileID: 6698682980503242541}
   m_Layer: 0
   m_Name: Enemy_Basher
   m_TagString: Enemy
@@ -609,11 +610,38 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 2.699504, z: 1.4738564}
   m_Center: {x: 0, y: -0.28344154, z: -0.16611171}
+--- !u!54 &6698682980503242541
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716115744002853539}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8458255387747779855
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -22,7 +23,6 @@ public class WeaponController : MonoBehaviour
 
     void Start()
     {
-        // pozycja gracza
         player = GameObject.FindWithTag("Player").transform;
 
         projectileSpawn = projectileSpawnGO.GetComponent<Transform>();
@@ -34,27 +34,25 @@ public class WeaponController : MonoBehaviour
         Transform target = TagTargeter("Enemy");
         if (target != transform)
         {
-            Debug.Log("Celuje do: " + target.gameObject.name);
+            // Debug.Log("Celuje do: " + target.gameObject.name);
             transform.LookAt(target.position + Vector3.up);
+        
+            if(timeSinceLastFire > rateOfFire)
+            {
+                GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
+
+                Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
+
+                projectileRB.AddForce(projectileSpawn.transform.forward * projectileForce, ForceMode.VelocityChange);
+
+                timeSinceLastFire = 0;
+
+                Destroy(projectile, 5);
+            } else
+            {
+                timeSinceLastFire += Time.deltaTime;
+            }
         }
-
-        if(timeSinceLastFire > rateOfFire)
-        {
-            GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
-
-            Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
-
-            projectileRB.AddForce(projectileSpawn.transform.forward * projectileForce, ForceMode.VelocityChange);
-
-            timeSinceLastFire = 0;
-
-            Destroy(projectile, 5);
-
-        } else
-        {
-            timeSinceLastFire += Time.deltaTime;
-        }
-
     }
     Transform TagTargeter(string tag)
     {

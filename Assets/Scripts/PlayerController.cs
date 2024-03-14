@@ -31,8 +31,12 @@ public class PlayerController : MonoBehaviour
         transform.position += movement;
     }
 
-    public void Hit(GameObject other)
+    private void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // logika œmierci gracza
+            Debug.Log("Gracz trafiony");
+        }
     }
 }
