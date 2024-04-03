@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
         {
             // logika œmierci gracza
             Debug.Log("Gracz trafiony");
+            GameObject.Find("LevelManager").GetComponent<LevelManager>().GameObject();
         }
     }
 }

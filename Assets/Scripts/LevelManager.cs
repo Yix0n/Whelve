@@ -12,6 +12,9 @@ public class LevelManager : MonoBehaviour
     float spawnDistance = 30;
     int points = 0;
     public GameObject pointsCounter;
+    public GameObject timeCounter;
+    public GameObject gameOverScreen;
+    public float levelTime = 60f;
 
     void Start()
     {
@@ -42,20 +45,45 @@ public class LevelManager : MonoBehaviour
 
                 timeSinceSpawn = 0;
             }
-
-            UpdateUI();
+            
         }
 
         //TODO: przyśpieszyć resp over time
+
+        if (levelTime < 0)
+        {
+            gameOver();
+        }
+        else
+        {
+            levelTime -= Time.deltaTime;
+            UpdateUI();
+        }
     }
 
     void UpdateUI()
     {
         pointsCounter.GetComponent<TextMeshProUGUI>().text = $"Punkt: {points}";
+        timeCounter.GetComponent<TextMeshProUGUI>().text = Mathf.Floor(levelTime).ToString();
     }
 
     public void AddPoints(int amount)
     {
         points += amount;
     }
+
+    public void gameOver()
+    {
+        player.GetComponent<PlayerController>().enabled = false;
+        player.transform.Find("object_head").GetComponent<WeaponController>().enabled = false;
+
+        GameObject[] enemyList = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemyList)
+        {
+            enemy.GetComponent<BasherController>().enabled = false;
+        }
+
+        gameOverScreen.SetActive(true);
+    }
 }
+
