@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -9,6 +10,9 @@ public class LevelManager : MonoBehaviour
     public float spawnInterval = 1;
     float timeSinceSpawn;
     float spawnDistance = 30;
+    int points = 0;
+    public GameObject pointsCounter;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -39,10 +43,19 @@ public class LevelManager : MonoBehaviour
                 timeSinceSpawn = 0;
             }
 
+            UpdateUI();
         }
 
         //TODO: przyśpieszyć resp over time
+    }
 
+    void UpdateUI()
+    {
+        pointsCounter.GetComponent<TextMeshProUGUI>().text = $"Punkt: {points}";
+    }
 
+    public void AddPoints(int amount)
+    {
+        points += amount;
     }
 }

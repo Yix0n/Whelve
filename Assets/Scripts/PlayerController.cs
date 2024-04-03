@@ -14,21 +14,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // pobierz san kontrolera (poziom)
-        float x = Input.GetAxisRaw("Horizontal");
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
 
-        Vector3 movement = Vector3.right * x;
-
-        float y = Input.GetAxisRaw("Vertical");
-        movement += Vector3.forward * y;
-
-        movement = movement.normalized;
-
-        movement *= Time.deltaTime;
-
-        movement *= moveSpeed;
-
-        transform.position += movement;
+        Vector3 targetDirection = new Vector3(x, 0, y);
+        Vector3 targetPosition = transform.position + targetDirection;
+        if(targetDirection.magnitude > Mathf.Epsilon)
+        {
+            transform.LookAt(targetPosition);
+            transform.position += transform.forward * Time.deltaTime * moveSpeed;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

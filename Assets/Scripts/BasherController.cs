@@ -7,9 +7,12 @@ public class BasherController : MonoBehaviour
     GameObject player;
     public float walkSpeed = 1f;
 
+    GameObject LevelManager;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        LevelManager = GameObject.Find("LevelManager");
     }
 
     void Update()
@@ -26,6 +29,8 @@ public class BasherController : MonoBehaviour
 
         if(projec.CompareTag("PlayerProjectile")) 
         {
+            LevelManager.GetComponent<LevelManager>().AddPoints(1);
+
             Destroy(projec);
 
             Destroy(transform.gameObject);
