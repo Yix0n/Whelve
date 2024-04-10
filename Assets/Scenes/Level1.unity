@@ -312,7 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc056ade726807647b29e48091e1f0cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 15
+  range: 150
   projectilePrefab: {fileID: 2822405286423173428, guid: 1e54f836a5de81c4eb836e46d2231a99, type: 3}
   projectileSpawnGO: {fileID: 47405614}
   rateOfFire: 1
@@ -1172,7 +1172,7 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 0
@@ -1200,7 +1200,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3d48906f842318c4bbcfa17dab483a30, type: 2}
+  - {fileID: 2100000, guid: 4fb014e46ffdfa949afc8696a01c662c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2106,7 +2106,7 @@ BoxCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
-  m_ProvidesContacts: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 4.760742, y: 5.49599, z: 5.124402}
@@ -2137,7 +2137,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

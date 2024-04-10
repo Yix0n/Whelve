@@ -44,6 +44,7 @@ public class WeaponController : MonoBehaviour
                 Rigidbody projectileRB = projectile.GetComponent<Rigidbody>();
 
                 projectileRB.AddForce(projectileSpawn.transform.forward * projectileForce, ForceMode.VelocityChange);
+                projectile.transform.LookAt(target.transform.position + Vector3.up);
 
                 timeSinceLastFire = 0;
 
