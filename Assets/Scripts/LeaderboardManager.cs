@@ -14,6 +14,8 @@ public class LeaderboardManager : MonoBehaviour
         public int points;
     }
 
+    public GameObject leaderboardGameObject;
+
     private string filePath = Application.persistentDataPath + "/leaderboard.json";
 
     private List<LeaderboardEntity> leaderboardEntities = new();
@@ -38,12 +40,26 @@ public class LeaderboardManager : MonoBehaviour
 
     private void LeaderboardFromFile()
     {
-
+        if(File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            leaderboardEntities = JsonUtility.FromJson<List<LeaderboardEntity>>(json);
+        }
     }
 
     public void ShowLeaderboardOnMainMenu(int records = 10)
     {
+        LeaderboardFromFile();
 
+        int count = 0;
+
+        foreach (var entity in leaderboardEntities)
+        {
+
+            count++;
+            if (count >= records)
+                break;
+        }
     }
 
     // Start is called before the first frame update
