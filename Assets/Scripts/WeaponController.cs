@@ -19,7 +19,7 @@ public class WeaponController : MonoBehaviour
 
     float timeSinceLastFire = 0;
 
-    public float projectileForce = 20;
+    public float projectileForce = 200;
 
     void Start()
     {
@@ -34,7 +34,6 @@ public class WeaponController : MonoBehaviour
         Transform target = TagTargeter("Enemy");
         if (target != transform)
         {
-            // Debug.Log("Celuje do: " + target.gameObject.name);
             transform.LookAt(target.position + Vector3.up);
         
             if(timeSinceLastFire > rateOfFire)
