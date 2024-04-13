@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     public GameObject gameOverScreen;
     public float levelTime = 60f;
 
+    private bool doEnemySpawn = true;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
@@ -27,7 +29,7 @@ public class LevelManager : MonoBehaviour
     {
         timeSinceSpawn += Time.deltaTime;
 
-        if (timeSinceSpawn > spawnInterval)
+        if (timeSinceSpawn > spawnInterval && doEnemySpawn)
         {
             Vector2 random = Random.insideUnitCircle.normalized;
 
@@ -75,6 +77,7 @@ public class LevelManager : MonoBehaviour
     public void gameOver()
     {
         player.GetComponent<PlayerController>().enabled = false;
+        doEnemySpawn = false;
         player.transform.Find("object_head").GetComponent<WeaponController>().enabled = false;
 
         GameObject[] enemyList = GameObject.FindGameObjectsWithTag("Enemy");
