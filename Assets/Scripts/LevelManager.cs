@@ -8,14 +8,17 @@ public class LevelManager : MonoBehaviour
     Transform player;
     public GameObject basherPrefab;
     public float spawnInterval = 1;
-    float timeSinceSpawn;
-    float spawnDistance = 30;
+
+    public float spawnIncreaseRate = 0.1f;
+    public float timeToIncreaseSpawn = 30f;
+    private float timeSinceSpawn;
+    private float spawnDistance = 30;
     public int points = 0;
     public GameObject pointsCounter;
     public GameObject timeCounter;
     public GameObject gameOverScreen;
-    public float levelTime = 60f;
-
+    public float levelTime = 0f;
+    public float timeSinceGameStart = 0f;
     private bool doEnemySpawn = true;
 
     void Start()
@@ -28,6 +31,15 @@ public class LevelManager : MonoBehaviour
     void Update()
     {
         timeSinceSpawn += Time.deltaTime;
+        timeSinceGameStart += Time.deltaTime;
+
+        if(timeSinceGameStart > timeToIncreaseSpawn) {
+            if (spawnInterval > 0)
+            {
+                spawnInterval -= spawnIncreaseRate;
+            }
+            timeSinceGameStart = 0f;
+        }
 
         if (timeSinceSpawn > spawnInterval && doEnemySpawn)
         {
@@ -50,17 +62,8 @@ public class LevelManager : MonoBehaviour
             
         }
 
-        //TODO: przyśpieszyć resp over time
-
-        if (levelTime < 0)
-        {
-            gameOver();
-        }
-        else
-        {
-            levelTime -= Time.deltaTime;
-            UpdateUI();
-        }
+        levelTime += Time.deltaTime;
+        UpdateUI();
     }
 
     void UpdateUI()
