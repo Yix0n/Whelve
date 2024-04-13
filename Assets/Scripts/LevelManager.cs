@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     public float spawnInterval = 1;
     float timeSinceSpawn;
     float spawnDistance = 30;
-    int points = 0;
+    public int points = 0;
     public GameObject pointsCounter;
     public GameObject timeCounter;
     public GameObject gameOverScreen;
@@ -84,6 +84,8 @@ public class LevelManager : MonoBehaviour
         }
 
         gameOverScreen.SetActive(true);
+        pointsCounter.SetActive(false);
+        timeCounter.SetActive(false);        
     }
 }
 
