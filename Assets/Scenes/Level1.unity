@@ -585,7 +585,7 @@ MonoBehaviour:
   range: 20
   projectilePrefab: {fileID: 2822405286423173428, guid: 1e54f836a5de81c4eb836e46d2231a99, type: 3}
   projectileSpawnGO: {fileID: 47405614}
-  rateOfFire: 1
+  rateOfFire: 0.1
   projectileForce: 20
 --- !u!1 &453229202
 GameObject:
@@ -1065,7 +1065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43ace5ab08b7ea04f9829c6ca837c5b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basherPrefab: {fileID: 7232799817997082942, guid: 69580f724d3e7fc4d9e6581da9e2e3eb, type: 3}
+  basherPrefab: {fileID: 4259935382802481416, guid: 69580f724d3e7fc4d9e6581da9e2e3eb, type: 3}
   spawnInterval: 1
   spawnIncreaseRate: 0.1
   timeToIncreaseSpawn: 30
