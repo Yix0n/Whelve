@@ -1067,11 +1067,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basherPrefab: {fileID: 7232799817997082942, guid: 69580f724d3e7fc4d9e6581da9e2e3eb, type: 3}
   spawnInterval: 1
+  spawnIncreaseRate: 0.1
+  timeToIncreaseSpawn: 30
   points: 0
   pointsCounter: {fileID: 1795857246}
   timeCounter: {fileID: 613594383}
   gameOverScreen: {fileID: 783175736}
-  levelTime: 60
+  levelTime: 0
+  timeSinceGameStart: 0
 --- !u!4 &841702789
 Transform:
   m_ObjectHideFlags: 0
