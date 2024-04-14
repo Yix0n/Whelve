@@ -1073,6 +1073,8 @@ MonoBehaviour:
   pointsCounter: {fileID: 1795857246}
   timeCounter: {fileID: 613594383}
   gameOverScreen: {fileID: 783175736}
+  gameOverPoints: {fileID: 2102370297}
+  gameOverTimer: {fileID: 351348350}
   levelTime: 0
   timeSinceGameStart: 0
 --- !u!4 &841702789

@@ -70,7 +70,7 @@ namespace LeaderboardSaver {
 
         private void SortLeaderboard()
         {
-            leaderboardEntities.RemoveAll(entity => entity == null); // Usuń wszystkie null z listy
+            leaderboardEntities.RemoveAll(entity => entity == null);
 
             if (leaderboardEntities.Count > 0)
             {
