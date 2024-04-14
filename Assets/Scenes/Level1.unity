@@ -585,7 +585,7 @@ MonoBehaviour:
   range: 20
   projectilePrefab: {fileID: 2822405286423173428, guid: 1e54f836a5de81c4eb836e46d2231a99, type: 3}
   projectileSpawnGO: {fileID: 47405614}
-  rateOfFire: 0.1
+  rateOfFire: 3
   projectileForce: 20
 --- !u!1 &453229202
 GameObject:

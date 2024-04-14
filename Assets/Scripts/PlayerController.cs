@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,10 +11,13 @@ public class PlayerController : MonoBehaviour
 
     public GameObject hpBar;
     public LevelManager levelManager;
+
+    private bool isImmune = false;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        hpBar.GetComponent<TextMeshProUGUI>().text = $"HP:\n{currentHealth}/{maxHealth}";
     }
 
     // Update is called once per frame
@@ -31,10 +33,27 @@ public class PlayerController : MonoBehaviour
             transform.LookAt(targetPosition);
             transform.position += transform.forward * Time.deltaTime * moveSpeed;
         }
+
+        // abilities
+
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            //dash
+            Dash();
+
+        } else if(Input.GetKeyDown(KeyCode.X))
+        {
+            
+        } else if(Input.GetKeyDown(KeyCode.C))
+        {
+            
+        }
     }
 
     public void TakeDamage(int damage)
     {
+
+        if(isImmune) return;
         currentHealth = Mathf.Max(0, currentHealth - damage);
 
         if(currentHealth <= 0)
@@ -48,5 +67,31 @@ public class PlayerController : MonoBehaviour
             // Gracz został trafiony, ale żyje jeszcze
             hpBar.GetComponent<TextMeshProUGUI>().text = $"HP:\n{currentHealth}/{maxHealth}";
         }
+    }
+
+    private void Dash(){
+        ToggleImmune();
+        float dashDistance = 20f;
+        Vector3 dashTarget = transform.position + transform.forward * dashDistance;
+
+        transform.position = dashTarget;
+
+        RaycastHit[] hits = Physics.RaycastAll(transform.position - transform.forward * dashDistance, transform.forward, dashDistance);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if(hit.collider.CompareTag("Enemy"))
+            {
+                Destroy(hit.collider.gameObject);
+                levelManager.GetComponent<LevelManager>().AddPoints(hit.collider.gameObject.GetComponent<BasherController>().points);
+            }
+        }
+
+        Invoke("ToggleImmune", 0.5f);
+    }
+
+    private void ToggleImmune()
+    {
+        isImmune = !isImmune;
     }
 }
