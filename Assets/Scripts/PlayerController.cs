@@ -15,9 +15,21 @@ public class PlayerController : MonoBehaviour
     private float overcloakTime = 8f;
     private float originalRoF;
     private float originalSpeed;
+    public GameObject AbilityDisplay;
+    public float dashCooldown = 8f;
+    private float timeSinceDash;
+    public float shockwaveCooldown = 20f;
+    private float timeSinceShockwave;
+    public float overcloakCooldown = 15f;
+    private float timeSinceOvercloak;
+
     // Start is called before the first frame update
     void Start()
     {
+        timeSinceDash = Time.time - dashCooldown;
+        timeSinceShockwave = Time.time - shockwaveCooldown;
+        timeSinceOvercloak = Time.time - overcloakCooldown;
+
         currentHealth = maxHealth;
         hpBar.GetComponent<TextMeshProUGUI>().text = $"HP:\n{currentHealth}/{maxHealth}";
     }
@@ -40,15 +52,36 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            Dash();
-
-        } else if(Input.GetKeyDown(KeyCode.X))
-        {
-            Shockwave();
-        } else if(Input.GetKeyDown(KeyCode.C))
-        {
-            Overcloak();
+            if(Time.time - timeSinceDash >= dashCooldown){
+                Dash();
+                timeSinceDash = Time.time;
+            } else {
+                Debug.Log("Dash jest na cooldownie");
+            }
         }
+        
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            if(Time.time - timeSinceShockwave >= shockwaveCooldown){
+                Shockwave();
+                timeSinceShockwave = Time.time;
+            } else {
+                Debug.Log("Shockwave jest na cooldownie");
+            }
+            
+        }
+        
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            if(Time.time - timeSinceOvercloak >= overcloakCooldown){
+                Overcloak();
+                timeSinceOvercloak = Time.time;
+            } else {
+                Debug.Log("Overcloak jest na cooldownie");
+            }
+        }
+
+        UpdateAbilityDisplay();
     }
 
     public void TakeDamage(int damage)
@@ -128,5 +161,22 @@ public class PlayerController : MonoBehaviour
     private void ToggleImmune()
     {
         isImmune = !isImmune;
+    }
+
+    private void UpdateAbilityDisplay()
+    {
+        /*
+        Dash: Ready ( Z )
+        Shockwave: Ready ( X )
+        Overcloak: Ready ( C )
+        */
+        string ready = "Ready";
+        
+        string dashDisplay = $@"Dash: {(Time.time - timeSinceDash >= dashCooldown ? ready : (dashCooldown - (Time.time - timeSinceDash)).ToString("0.00"))} ( Z )\n";
+        string shockwaveDisplay = $@"Shockwave: {(Time.time - timeSinceShockwave >= shockwaveCooldown ? ready : (shockwaveCooldown - (Time.time - timeSinceShockwave)).ToString("0.00"))} ( X )\n";
+        string overcloakDisplay = $@"Overcloak: {(Time.time - timeSinceOvercloak >= overcloakCooldown ? ready : (overcloakCooldown - (Time.time - timeSinceOvercloak)).ToString("0.00"))} ( C )\n";
+
+
+        AbilityDisplay.GetComponent<TextMeshProUGUI>().text = dashDisplay + shockwaveDisplay + overcloakDisplay;
     }
 }
