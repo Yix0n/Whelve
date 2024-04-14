@@ -585,7 +585,7 @@ MonoBehaviour:
   range: 20
   projectilePrefab: {fileID: 2822405286423173428, guid: 1e54f836a5de81c4eb836e46d2231a99, type: 3}
   projectileSpawnGO: {fileID: 47405614}
-  rateOfFire: 3
+  rateOfFire: 1
   projectileForce: 20
 --- !u!1 &453229202
 GameObject:
@@ -3100,6 +3100,7 @@ MonoBehaviour:
   moveSpeed: 10
   hpBar: {fileID: 1528429977}
   levelManager: {fileID: 841702788}
+  weaponController: {fileID: 386165107}
 --- !u!65 &2038232064
 BoxCollider:
   m_ObjectHideFlags: 0

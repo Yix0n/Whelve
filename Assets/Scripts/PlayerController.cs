@@ -8,11 +8,13 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
     public float moveSpeed = 10f;
-
     public GameObject hpBar;
     public LevelManager levelManager;
-
+    public WeaponController weaponController;
     private bool isImmune = false;
+    private float overcloakTime = 8f;
+    private float originalRoF;
+    private float originalSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,6 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Z))
         {
-            //dash
             Dash();
 
         } else if(Input.GetKeyDown(KeyCode.X))
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
             Shockwave();
         } else if(Input.GetKeyDown(KeyCode.C))
         {
-            
+            Overcloak();
         }
     }
 
@@ -103,6 +104,25 @@ public class PlayerController : MonoBehaviour
                 Destroy(enemy.gameObject);
             }
         }
+    }
+
+    private void Overcloak()
+    {
+        var weapon = weaponController.GetComponent<WeaponController>();
+        originalRoF = weapon.rateOfFire;
+        originalSpeed = this.moveSpeed;
+
+        weapon.rateOfFire = weapon.rateOfFire / 2;
+        this.moveSpeed = this.moveSpeed * 2;
+
+        Invoke("RestoreOriginalValues", overcloakTime);
+    }
+
+    private void RestoreOriginalValues()
+    {
+        var weapon = weaponController.GetComponent<WeaponController>();
+        weapon.rateOfFire = originalRoF;
+        this.moveSpeed = originalSpeed;
     }
 
     private void ToggleImmune()
