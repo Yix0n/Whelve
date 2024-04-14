@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BasherController : MonoBehaviour
@@ -7,6 +8,8 @@ public class BasherController : MonoBehaviour
     public int damage = 70;
     GameObject player;
     public float walkSpeed = 1f;
+
+    public int points = 1;
 
     GameObject LevelManager;
 
@@ -18,9 +21,7 @@ public class BasherController : MonoBehaviour
 
     void Update()
     {
-        //patrz si� na gracza
         transform.LookAt(player.transform.position);
-        //idz do przodu
         transform.position += transform.forward * Time.deltaTime * walkSpeed;
     }
 
@@ -30,9 +31,9 @@ public class BasherController : MonoBehaviour
 
         if(projec.CompareTag("PlayerProjectile")) 
         {
-            LevelManager.GetComponent<LevelManager>().AddPoints(1);
-
             Destroy(projec);
+
+            LevelManager.GetComponent<LevelManager>().AddPoints(points);
 
             Destroy(transform.gameObject);
         }
@@ -44,6 +45,8 @@ public class BasherController : MonoBehaviour
             if(playerController != null)
             {
                 playerController.TakeDamage(damage);
+
+
                 Destroy(transform.gameObject);
             }
         }

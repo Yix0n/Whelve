@@ -17,6 +17,8 @@ public class LevelManager : MonoBehaviour
     public GameObject pointsCounter;
     public GameObject timeCounter;
     public GameObject gameOverScreen;
+    public GameObject gameOverPoints;
+    public GameObject gameOverTimer;
     public float levelTime = 0f;
     public float timeSinceGameStart = 0f;
     private bool doEnemySpawn = true;
@@ -62,8 +64,11 @@ public class LevelManager : MonoBehaviour
             
         }
 
-        levelTime += Time.deltaTime;
-        UpdateUI();
+        if(doEnemySpawn)
+        {
+            levelTime += Time.deltaTime;
+            UpdateUI();
+        }
     }
 
     void UpdateUI()
@@ -82,6 +87,9 @@ public class LevelManager : MonoBehaviour
         player.GetComponent<PlayerController>().enabled = false;
         doEnemySpawn = false;
         player.transform.Find("object_head").GetComponent<WeaponController>().enabled = false;
+
+        gameOverPoints.GetComponent<TextMeshProUGUI>().text = $"Punkty: {points}";
+        gameOverTimer.GetComponent<TextMeshProUGUI>().text = $"Czas: {Mathf.Floor(levelTime)}";
 
         GameObject[] enemyList = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (GameObject enemy in enemyList)

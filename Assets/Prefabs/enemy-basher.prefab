@@ -5959,6 +5959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 70
   walkSpeed: 1
+  points: 1
 --- !u!65 &8331884191650883908
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5978,5 +5979,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.5319557, y: 4.9672036, z: 11.321244}
-  m_Center: {x: -0.4004383, y: 1.9836018, z: -0.60982466}
+  m_Size: {x: 5.5319557, y: 4.538794, z: 11.321244}
+  m_Center: {x: -0.4004383, y: 2.2792456, z: -0.60982466}
