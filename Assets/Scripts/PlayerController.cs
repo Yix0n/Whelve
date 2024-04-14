@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         } else if(Input.GetKeyDown(KeyCode.X))
         {
-            
+            Shockwave();
         } else if(Input.GetKeyDown(KeyCode.C))
         {
             
@@ -88,6 +88,21 @@ public class PlayerController : MonoBehaviour
         }
 
         Invoke("ToggleImmune", 0.5f);
+    }
+
+    private void Shockwave()
+    {
+        float shockwaveRadius = 15f;
+        Collider[] hitEnemies = Physics.OverlapSphere(transform.position, shockwaveRadius);
+
+        foreach(Collider enemy in hitEnemies)
+        {
+            if(enemy.CompareTag("Enemy"))
+            {
+                levelManager.GetComponent<LevelManager>().AddPoints(enemy.gameObject.GetComponent<BasherController>().points);
+                Destroy(enemy.gameObject);
+            }
+        }
     }
 
     private void ToggleImmune()
