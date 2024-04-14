@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -64,10 +65,8 @@ namespace LeaderboardSaver {
 
         private string SerializeObjectToJson(LBEntity entity)
         {
-            string name = entity.name.Contains('"') ? entity.name.Replace("\"", "\\\"") : entity.name;
-            return $"{{\"name\":\"{name}\",\"points\":{entity.points},\"time\":{entity.time},\"date\":{entity.date}}}";
+            return $"{{\"name\":\"{entity.name.Replace("\"", "")}\",\"points\":{entity.points},\"time\":{entity.time},\"date\":{entity.date}}}";
         }
-
 
         private void SortLeaderboard()
         {
@@ -114,7 +113,7 @@ namespace LeaderboardSaver {
                 {
                     return new LBEntity
                     {
-                        name = values[0].Substring(values[0].IndexOf(":") + 2),
+                        name = values[0].Substring(values[0].IndexOf(":") + 2).Replace('"', '\u200B'),
                         points = int.Parse(values[1].Substring(values[1].IndexOf(":") + 1)),
                         time = int.Parse(values[2].Substring(values[2].IndexOf(":") + 1)),
                         date = long.TryParse(values[3].Substring(values[3].IndexOf(":") + 1).Trim().Replace(",", "."), out long dateValue) ? dateValue : 0
