@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         Vector3 dashTarget = transform.position + transform.forward * dashDistance;
 
         GameObject qteObject = Instantiate(qtePrefab, transform.position, Quaternion.identity);
-        Destroy(qteObject, 20f);
+        Destroy(qteObject, 0.25f);
 
         transform.position = dashTarget;
 
