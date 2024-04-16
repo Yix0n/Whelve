@@ -3645,6 +3645,7 @@ MonoBehaviour:
   dashCooldown: 8
   shockwaveCooldown: 20
   overcloakCooldown: 15
+  qtePrefab: {fileID: 5315219959123046745, guid: 6ecb841dfcc1a3944b260099cb926d7c, type: 3}
 --- !u!65 &2038232064
 BoxCollider:
   m_ObjectHideFlags: 0

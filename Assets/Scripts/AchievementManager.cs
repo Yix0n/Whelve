@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +10,7 @@ public class AchievementManager : MonoBehaviour
     public GameObject achievementPlace; // to co ma się przesunąć
     public GameObject achievementName;
     public GameObject achievementDesc;
-    
+    private Boolean qteAchievement = false;    
     private LevelManager level;
 
     // Start is called before the first frame update
@@ -21,9 +22,9 @@ public class AchievementManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(level.points == 1)
+        if(level.points == 420)
         {
-            ShowAchievement("Woah!", "To twój pierwszy punkt!");
+            ShowAchievement("Hehe", "Wiadomo o co chodzi");
         }
     }
 
@@ -44,5 +45,15 @@ public class AchievementManager : MonoBehaviour
         achievementDesc.GetComponent<TextMeshProUGUI>().text = "";
 
         achievementPlace.SetActive(false);
+    }
+
+    public void GetAchievement(string name)
+    {
+        if(name == "qte")
+        {
+            if(qteAchievement == true) return;
+            qteAchievement = !qteAchievement;
+            ShowAchievement("QtE", "Someone is playing with fire");
+        }
     }
 }

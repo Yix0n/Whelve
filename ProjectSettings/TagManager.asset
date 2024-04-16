@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PlayerProjectile
+  - qte
   layers:
   - Default
   - TransparentFX

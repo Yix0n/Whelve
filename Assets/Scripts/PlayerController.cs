@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private float timeSinceShockwave;
     public float overcloakCooldown = 15f;
     private float timeSinceOvercloak;
+    public GameObject qtePrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -107,6 +108,9 @@ public class PlayerController : MonoBehaviour
         ToggleImmune();
         float dashDistance = 20f;
         Vector3 dashTarget = transform.position + transform.forward * dashDistance;
+
+        GameObject qteObject = Instantiate(qtePrefab, transform.position, Quaternion.identity);
+        Destroy(qteObject, 20f);
 
         transform.position = dashTarget;
 

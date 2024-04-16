@@ -8,15 +8,15 @@ public class BasherController : MonoBehaviour
     public int damage = 70;
     GameObject player;
     public float walkSpeed = 1f;
-
     public int points = 1;
-
-    GameObject LevelManager;
+    private LevelManager level;
+    private AchievementManager achievement;
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        LevelManager = GameObject.Find("LevelManager");
+        level = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        achievement = GameObject.Find("AchievementManager").GetComponent<AchievementManager>();
     }
 
     void Update()
@@ -29,16 +29,18 @@ public class BasherController : MonoBehaviour
     {
         GameObject projec = collision.gameObject;
 
+        Debug.Log(projec.tag);
+
         if(projec.CompareTag("PlayerProjectile")) 
         {
             Destroy(projec);
 
-            LevelManager.GetComponent<LevelManager>().AddPoints(points);
+            level.AddPoints(points);
 
             Destroy(transform.gameObject);
         }
 
-        if(collision.gameObject.CompareTag("Player"))
+        if(projec.CompareTag("Player"))
         {
             PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
 
@@ -49,6 +51,11 @@ public class BasherController : MonoBehaviour
 
                 Destroy(transform.gameObject);
             }
+        }
+
+        if(projec.CompareTag("qte")) 
+        {
+            achievement.GetAchievement("qte");
         }
     }
 }
