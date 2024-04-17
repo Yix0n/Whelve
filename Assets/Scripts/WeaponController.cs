@@ -28,6 +28,7 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timeSinceLastFire += Time.deltaTime;
         Transform target = TagTargeter("Enemy");
         if (target != transform)
         {
@@ -45,9 +46,6 @@ public class WeaponController : MonoBehaviour
                 timeSinceLastFire = 0;
 
                 Destroy(projectile, 5);
-            } else
-            {
-                timeSinceLastFire += Time.deltaTime;
             }
         }
     }
