@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1734858306757003843}
   - component: {fileID: 7480822920336285653}
-  - component: {fileID: -6209879866146407640}
   - component: {fileID: -3783957854364711675}
   m_Layer: 0
   m_Name: Qte
@@ -56,19 +55,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.0535774, y: 5.1338196, z: 6.9180484}
   m_Center: {x: 0, y: 2.5186696, z: -0.022588015}
---- !u!114 &-6209879866146407640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5315219959123046745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db063ebe2fb78dc48b8acdc1126ed6c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  achivementGO: {fileID: 0}
 --- !u!54 &-3783957854364711675
 Rigidbody:
   m_ObjectHideFlags: 0
