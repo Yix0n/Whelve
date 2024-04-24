@@ -16,20 +16,25 @@ namespace LeaderboardSaver {
             public long date;
         }
 
+        private bool isInstanceSaved = false;
+
         private string filepath = Path.Combine(Application.persistentDataPath, "leaderboard.json");
     
         public static List<LBEntity> leaderboardEntities { get; private set; } = new List<LBEntity>(); 
 
         public LeaderboardSaver() {
             LeaderboardFromFile();
+            isInstanceSaved = false;
         }
 
         public void AddNewRecord(string name, int points, float time) 
         {
+            if (isInstanceSaved) return;
+
             var newEntity = new LBEntity {
                 name = name,
                 points = points,
-                time = Mathf.RoundToInt(time), // Zaokrąglamy i konwertujemy do int
+                time = Mathf.RoundToInt(time), 
                 date = DateTime.Now.Ticks
             };
             leaderboardEntities.Add(newEntity);
@@ -137,8 +142,9 @@ namespace LeaderboardSaver {
             return new DateTime(ticks);
         }
 
-        public List<LBEntity> GetLeaders(int records = 10)
+        public List<LBEntity> GetLeaders(int r = 10)
         {
+            int records = r * 2;
             int count = 0;
             List<LBEntity> leaders = new List<LBEntity>();
 

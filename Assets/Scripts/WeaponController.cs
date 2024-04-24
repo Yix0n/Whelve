@@ -73,40 +73,4 @@ public class WeaponController : MonoBehaviour
         }
         return closestTarget;
     }
-
-    Transform LegeacyTargeter()
-    {
-        Collider[] collidersInRange = Physics.OverlapSphere(transform.position, range);
-
-        Transform target = transform;
-        float targetDistance = Mathf.Infinity;
-
-        foreach (Collider collider in collidersInRange)
-        {
-            GameObject model = collider.gameObject;
-
-            if (model.transform.parent != null)
-            {
-
-                GameObject enemy = model.transform.parent.gameObject;
-
-                if (enemy.CompareTag("Enemy"))
-                {
-
-                    Vector3 diference = player.position - enemy.transform.position;
-
-                    float distance = diference.magnitude;
-                    if (distance < targetDistance)
-                    {
-
-                        target = enemy.transform;
-                        targetDistance = distance;
-                    }
-                }
-            }
-
-
-        }
-        return target;
-    }
 }

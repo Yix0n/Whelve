@@ -52,7 +52,7 @@ public class LeaderboardManager : MonoBehaviour
         foreach (var leader in leaders)
         {
 
-            if (leader != null && leader.name != null) // Sprawdzenie, czy leader i jego pole name nie są null
+            if (leader != null && leader.name != null)
             {
                 i++;
                 string leaderboardEntity = $"{i}. {leader.name} - {leader.points} pkt - {leader.time} s\n";
@@ -60,6 +60,4 @@ public class LeaderboardManager : MonoBehaviour
             } else continue;
         }
     }
-
-
 }
